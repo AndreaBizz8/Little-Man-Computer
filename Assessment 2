@@ -1,0 +1,67 @@
+#input capitale
+	IN 	
+	STO	capital
+#input tasso %
+	IN	
+	STO	tax	
+#input years
+	IN
+	STO	year
+number	LDA	year
+# loop for calculation TAX (TAX/100)
+looptax	LDA	tax
+	SUB	hundre
+	STO	tax
+
+	LDA	count
+	ADD	one
+	STO	count
+
+	LDA	tax
+	BRP	looptax
+		
+	LDA	count
+	SUB	one
+	STO	tax
+	LDA	tax
+
+# LOOP FOR CAPITAL X TAX
+loopcap	LDA	capital
+	LDA	count
+	ADD	one
+	STO	count
+	SUB	capital
+	BRZ	endloop
+	BR	loopcap
+	
+endloop	LDA	capital
+	ADD	tax
+	STO	capital
+# LOOP FOR YEARS
+#	LDA	year
+#	SUB	one
+#	STO	year
+#	LDA	year
+#	BRP	number
+	LDA	capital
+	OUT
+
+	COB
+
+#DEFINING LABELS
+taxnew	DAT	0
+result	DAT	0
+capital	DAT	0
+tax	DAT	0
+count	DAT	0
+one	DAT	1
+year	DAT	0
+hundre	DAT	100
+
+
+
+
+
+
+
+
